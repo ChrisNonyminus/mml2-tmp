@@ -58,6 +58,11 @@ build: main
 check:
 	sha1sum --check mml2.sha
 
+fixgp:
+	@echo "Stripping %got & %gp_rel from assembly..."
+	grep -rlE '%(got|gp_rel)' asm/esa/nonmatchings | xargs sed -i -E -s 's/%(got|gp_rel)\(([^)]+)\)\(\$$28\)/\2/' 2>/dev/null || true
+	grep -rlE '%(got|gp_rel)' asm/esa/nonmatchings | xargs sed -i -E -s 's/\$$28, %(got|gp_rel)\(([^)]+)\)/\2/' 2>/dev/null || true
+
 main: main_dirs $(MAIN_TARGET).exe
 main_dirs: nonmatchings
 	$(foreach dir, $(MAIN_ASM_DIRS) $(MAIN_SRC_DIRS), $(shell mkdir -p $(BUILD_DIR)/$(dir)))
@@ -96,11 +101,11 @@ $(SOTNDISK): $(GO)
 
 # for each file in NONMATCHINGS_DIR recursively, run unix2dos on it
 
-nonmatchings: $(NONMATCHINGS_DIRS)
+nonmatchings: $(NONMATCHINGS_DIRS) fixgp
 	$(foreach dir,$(NONMATCHINGS_DIRS),$(shell find $(dir) -type f -exec unix2dos {} \;))
 
 
-.PHONY: all, clean, format, check, expected, nonmatchings
+.PHONY: all, clean, format, check, expected, nonmatchings, fixgp
 .PHONY: main
 .PHONY: %_dirs
 SHELL = /bin/bash -e -o pipefail
