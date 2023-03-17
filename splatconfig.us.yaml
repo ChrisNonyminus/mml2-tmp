@@ -1,0 +1,61 @@
+options:
+  platform:     psx
+  basename:     mml2
+  base_path:    .
+  target_path:  mml2.exe
+  asm_path:     asm/main
+  asset_path:   assets/main
+  src_path:     src/main
+  compiler:     SN64
+  symbol_addrs_path: syms.us.txt
+  find_file_boundaries: yes
+  use_legacy_include_asm: no
+  migrate_rodata_to_functions: no
+  auto_decompile_empty_functions: no
+  gp_value: 0x80078920
+
+segments:
+  - [0x800, header]
+  - name: main
+    type: code
+    start: 0x00000800
+    vram:  0x80010000
+    subalign: 4
+    subsegments:
+      - [0x800, rodata]
+      - [0x11A0, rodata]
+      - [0x16D4, c]
+      - [0x60F4, c]
+      - [0x43AE4, asm]
+      - [0x44624, asm]
+      - [0x44654, asm]
+      - [0x446D4, asm]
+      - [0x447C4, asm]
+      - [0x448D4, asm]
+      - [0x44DB4, asm]
+      - [0x452D4, asm]
+      - [0x45304, asm]
+      - [0x455C4, asm]
+      - [0x45764, asm]
+      - [0x45924, asm]
+      - [0x45984, asm]
+      - [0x459E4, asm]
+      - [0x45AA4, asm]
+      - [0x45B54, asm]
+      - [0x45CB4, asm]
+      - [0x470E4, asm]
+      - [0x47224, asm]
+      - [0x472A4, asm]
+      - [0x472D4, asm]
+      - [0x47304, asm]
+      - [0x47384, asm]
+      - [0x47474, asm]
+      - [0x475B4, asm]
+      - [0x47BB4, asm]
+      - [0x48994, asm]
+      - [0x489B4, asm]
+      - [0x48D34, asm]
+      - [0x48D64, asm]
+      - [0x548F4, asm]
+      - [0x58840, data]
+  - [0x69800]

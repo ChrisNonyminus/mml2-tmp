@@ -1,0 +1,16 @@
+#define PADLeft 0x8000
+#define PADDown 0x4000
+#define PADRight 0x2000
+#define PADUp 0x1000
+#define PADStart 0x800
+#define PADR3 0x400
+#define PADL3 0x200
+#define PADSelect 0x100
+#define PADSquare 0x80
+#define PADCross 0x40
+#define PADCircle 0x20
+#define PADTriangle 0x10
+#define PADRB1 0x8
+#define PADLB1 0x4
+#define PADRB2 0x2
+#define PADLB2 0x1
